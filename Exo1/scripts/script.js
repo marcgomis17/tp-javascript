@@ -20,6 +20,11 @@ function buildSheet() {
     editBtn.setAttribute('src', './icons/edit.svg');
     editBtn.addEventListener('click', () => {
         textArea.toggleAttribute("disabled");
+        if (!textArea.disabled) {
+            blankSpace.style.visibility = "hidden";
+        } else {
+            blankSpace.style.visibility = "visible";
+        }
     })
 
     deleteBtn.className = "action-btn";
@@ -40,9 +45,11 @@ function buildSheet() {
         if (textArea.style.visibility == "visible") {
             textArea.style.visibility = "hidden";
             sheet.style.border = "none";
+            editBtn.disabled = true;
         } else {
             textArea.style.visibility = "visible";
             sheet.style.border = "1px solid rgb(25, 199, 25)";
+            editBtn.disabled = false;
         }
     });
     actionBar.append(blankSpace, btn);
