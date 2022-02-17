@@ -4,6 +4,7 @@ var notes = document.getElementById('notes');
 function buildSheet() {
     var sheet = document.createElement('div');
     var actionBar = document.createElement('div');
+    var blankSpace = document.createElement('div');
     var btn = document.createElement('div');
     var editBtn = document.createElement('input');
     var deleteBtn = document.createElement('input');
@@ -11,6 +12,7 @@ function buildSheet() {
     textArea.disabled = true;
 
     sheet.className = "sheet";
+    blankSpace.className = "blank";
     actionBar.className = "action-bar";
     btn.className = "btn";
     editBtn.className = "action-btn";
@@ -34,7 +36,7 @@ function buildSheet() {
 
 
     btn.append(deleteBtn, editBtn);
-    actionBar.addEventListener('click', () => {
+    blankSpace.addEventListener('click', () => {
         if (textArea.style.visibility == "visible") {
             textArea.style.visibility = "hidden";
             sheet.style.border = "none";
@@ -43,7 +45,7 @@ function buildSheet() {
             sheet.style.border = "1px solid rgb(25, 199, 25)";
         }
     });
-    actionBar.appendChild(btn);
+    actionBar.append(blankSpace, btn);
     sheet.append(actionBar, textArea);
     return sheet;
 }
