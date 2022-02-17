@@ -1,0 +1,55 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: lightgray;
+}
+
+.container{
+    height: 90vh;
+    display: flex;
+    align-content: center;
+}
+
+.buttons{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons input{
+    margin-top: 2%;
+    height: 6%;
+    width: 20%;
+}
+
+div[class*="items"]{
+    flex: 2;
+    background-color: #fff;
+}
+
+p{
+    height: 40px;
+    padding-top: 1.5%;
+    background-color: #fff;
+    color: #000;
+}
+
+.selected{
+    background-color: blue;
+    color: #fff;
+}
+
+.unselected{
+    background-color: #fff;
+    color: #000;
+}
+
+p:hover{
+    background-color: blue;
+    color: #fff;
+    cursor: pointer;
+}
