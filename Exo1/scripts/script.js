@@ -34,7 +34,15 @@ function buildSheet() {
 
 
     btn.append(deleteBtn, editBtn);
-
+    actionBar.addEventListener('click', () => {
+        if (textArea.style.visibility == "visible") {
+            textArea.style.visibility = "hidden";
+            sheet.style.border = "none";
+        } else {
+            textArea.style.visibility = "visible";
+            sheet.style.border = "1px solid rgb(25, 199, 25)";
+        }
+    });
     actionBar.appendChild(btn);
     sheet.append(actionBar, textArea);
     return sheet;
