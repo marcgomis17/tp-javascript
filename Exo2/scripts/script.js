@@ -4,87 +4,102 @@ var items = [
     { name: "Mon Troisième", selected: 0, location: "leftGroup" },
     { name: "Mon Quatrième", selected: 0, location: "leftGroup" }
 ];
-var leftGroup = document.getElementById('items');
-var rightGroup = document.getElementById('new-items');
+var leftGroup = document.getElementById('left-group');
+var rightGroup = document.getElementById('right-group');
 var toRightBtn = document.getElementById('to-right');
-var toLeftBtn = document.getElementById('toLeft');
+var toLeftBtn = document.getElementById('to-left');
+toLeftBtn.disabled = true;
 
-function buildItems() {
+function buildList() {
     items.forEach(item => {
         var p = document.createElement('p');
         p.innerText = item.name;
         leftGroup.appendChild(p);
+    });
+}
 
-        p.onclick = () => {
-            p.classList.toggle("selected");
-            if (item.selected == false) {
-                item.selected = true;
-                toLeftBtn.toggleAttribute("disabled");
-                if (toRightBtn.hasAttribute("disabled")) {
-                    toRightBtn.toggleAttribute("disabled");
+function setEvents() {
+    elements = document.querySelectorAll('p');
+    elements.forEach(element => {
+        element.onmouseover = () => {
+            element.classList.add('mouseover');
+        }
+        element.onmouseout = () => {
+            element.classList.remove('mouseover');
+        }
+        element.onclick = () => {
+            element.classList.toggle('active');
+            items.forEach(item => {
+                var selectedItems = [];
+                if (element.classList.contains('active')) {
+                    if (leftGroup.querySelectorAll('p').length == 0 || rightGroup.querySelectorAll('p').length == 0) {
+                        if (element.innerText == item.name) {
+                            item.selected == true;
+                            if (item.location == "leftGroup") {
+                                toLeftBtn.disabled = true;
+                                toRightBtn.disabled = false;
+                            } else {
+                                if (item.location == "rightGroup") {
+                                    toRightBtn.disabled = true;
+                                    toLeftBtn.disabled = false;
+                                }
+                            }
+                            console.log(item.name + ' selected');
+                        }
+                    } else {
+                        toRightBtn.disabled = false;
+                        toLeftBtn.disabled = false;
+                    }
+                } else {
+                    if (element.innerText == item.name) {
+                        item.selected == false;
+                        if (item.location == "leftGroup") {
+                            toLeftBtn.disabled = false;
+                        } else {
+                            if (item.location == "rightGroup") {
+                                toRightBtn.disabled = true;
+                            }
+                        }
+                        console.log(item.name + ' unselected');
+                    }
                 }
-            } else {
-                item.selected = false;
-                toLeftBtn.toggleAttribute("disabled");
-            }
+            });
         }
     });
 }
 
-function removeNode(item, dest) {
-    if (dest.id == "new-items") {
-        leftGroup.querySelectorAll('p').forEach(node => {
-            if (node.innerText == item.name) {
-                leftGroup.removeChild(node);
-            }
-        });
-    } else {
-        rightGroup.querySelectorAll('p').forEach(node => {
-            if (node.innerText == item.name) {
-                rightGroup.removeChild(node);
-            }
-        });
-    }
-}
-
-function moveItem(item, dest) {
-    var p = document.createElement('p');
-    p.innerText = item.name;
-    item.selected = false;
-    p.onclick = () => {
-        p.classList.toggle("selected");
-        if (item.selected == false) {
-            item.selected = true;
-            if (item.selected) {
-                toRightBtn.toggleAttribute("disabled");
-                if (toLeftBtn.hasAttribute("disabled")) {
-                    toLeftBtn.toggleAttribute("disabled");
+function moveItems(grpFrom, grpTo) {
+    var elements = grpFrom.querySelectorAll('p');
+    elements.forEach(element => {
+        if (element.classList.contains('active')) {
+            items.forEach(item => {
+                if (item.name == element.innerText) {
+                    var p = document.createElement('p');
+                    p.innerText = item.name;
+                    grpTo.append(p);
+                    grpFrom.removeChild(element);
+                    setEvents();
+                    if (item.location == "leftGroup") {
+                        item.location = "rightGroup";
+                    } else {
+                        if (item.location = "rightGroup") {
+                            item.location = "leftGroup";
+                        }
+                        console.log(item.location);
+                    }
+                    console.log(items);
                 }
-            }
-        } else {
-            item.selected = false;
+            });
         }
-    }
-    dest.appendChild(p);
-    removeNode(item, dest);
+    });
 }
 
-buildItems();
-
+buildList();
+setEvents();
 toRightBtn.onclick = () => {
-    items.forEach(item => {
-        if (item.selected == true) {
-            moveItem(item, rightGroup);
-            item.location = "rightGroup";
-        }
-    });
+    moveItems(leftGroup, rightGroup);
 }
 
 toLeftBtn.onclick = () => {
-    items.forEach(item => {
-        if (item.selected == true) {
-            moveItem(item, leftGroup);
-            item.location = "leftGroup";
-        }
-    });
+    moveItems(rightGroup, leftGroup);
 }
