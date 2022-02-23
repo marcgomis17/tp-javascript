@@ -4,78 +4,83 @@
 
 body{
     color: #fff;
+    overflow: hidden;
 }
 
-p{
-    color: black;
+#error{
     text-align: center;
-    /* margin-top: 5%; */
+    color: red;
+    font-size: large;
+    padding-bottom: 5%;
+}
+
+#show-password{
+    text-align: center;
+    font-size: 120%;
+    font-weight: bold;
 }
 
 .container{
+    height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
 
 .generator{
-    background-color: #9531f3;
-    flex: auto;
-    width: 50%;
+    align-self: baseline;
+    justify-self: center;
+    background-color: #8a2be2;
     padding: 1%;
+    min-width: 30%;
 }
 
-#table{
+.table{
+    background-color: #4b0082;
     display: flex;
     flex-direction: column;
-    padding: 4%;
-    background-color: #46097e;
+    align-content: center;
+    padding: 3%;
 }
 
-#pwd-display{
+#password-display{
     display: flex;
     flex-direction: column;
     border: 1px solid #040480;
-    height: 60px;
-    background-color: #9531f3;
+    height: 80px;
+    background-color: #8a2be2;
 }
 
 #copy-btn{
     align-self: flex-end;
 }
 
-#pwd-display p{
-    color: #fff;
-    margin-top: -2%;
-    text-align: center;
-    font-weight: bold;
-    font-size: 30px;
-}
-
 .form-wrapper{
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
-#pwd-length{
-    width: 10%;
-    text-align: right;
+#form{
+    display: flex;
+    flex-direction: column;
 }
 
 .form-control{
-    margin-top: 4%;
+    margin-top: 3%;
     display: flex;
+    align-items: center;
 }
 
 .form-control label{
     flex: 2;
 }
 
-.submit{
-    margin-top: 8%;
+input[type="text"]{
+    text-align: right;
+    min-width: 10%;
+    width: 15%;
 }
 
-.submit input{
+#btn{
+    margin-top: 5%;
     flex: auto;
     height: 40px;
     background-color: #f5bc51;
@@ -83,9 +88,5 @@ p{
     color: #ad63f1;
     font-weight: bold;
     font-size: large;
+    width: 100%;
 }
-
-/* .submit input:hover{
-    cursor: pointer;
-}
- */

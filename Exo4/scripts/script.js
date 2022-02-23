@@ -13,7 +13,7 @@ var questionList = [
         b: "Assembly",
         c: "Short Code",
         d: "Algol",
-        correct: "Short Code"
+        correct: "c"
     },
     {
         question: "Lequel des quatre langages suivants est le plus ancien?",
@@ -21,7 +21,7 @@ var questionList = [
         b: "JavaScript",
         c: "Visual Basic",
         d: "C#",
-        correct: "Visual Basic"
+        correct: "c"
     },
     {
         question: "Le langage que l'ordinateur comprend est",
@@ -29,131 +29,103 @@ var questionList = [
         b: "Assembly",
         c: "Binaire",
         d: "Algol",
-        correct: "Binaire"
+        correct: "c"
     }
 ];
 
 var container = document.querySelector('.container');
+var questionDisplay = document.getElementById('question-display');
+var questionContainer = document.querySelector('.question');
+var scoreDisplay = document.querySelector('.score');
+var scoreDisplayText = document.querySelector('.score-display');
+var labels = document.querySelectorAll('label');
+var inputs = document.querySelectorAll('input[type=radio]');
 var answerAp = document.querySelector('.status');
+var form = document.getElementById('form-wrapper');
+var index = 0;
 var score = 0;
-function between(min, max) {
-    return Math.floor(
-        Math.random() * (max - min + 1) + min
-    )
-}
+var answer = "";
 
-var questionIndex = between(0, 3);
-var question = questionList[questionIndex];
-
-function buildForm() {
-    //creation of the elements
-    var nextBtn = document.createElement('input');
-    var quizzDisplay = document.createElement('div');
-    var questionDisplay = document.createElement('p');
-    var formWrapper = document.createElement('div');
-    var form = document.createElement('form');
-    var bFormControl = document.createElement('div');
-
-    //setting attributes and values of the elements
-    quizzDisplay.className = "question";
-    questionDisplay.id = "question-display";
-    questionDisplay.innerText = question.question;
-    formWrapper.className = "form-wrapper";
-    form.id = "form";
-    bFormControl.classList.add('form-control', 'submit');
-    nextBtn.setAttribute('role', 'button');
-    nextBtn.type = "submit"
-    nextBtn.value = "Suivant";
-    nextBtn.disabled = true;
-    nextBtn.onmouseover = () => {
-        if (nextBtn.disabled) {
-            nextBtn.style.cursor = "default";
-        } else {
-            nextBtn.style.cursor = "pointer";
-        }
-    }
-
-    for (let i = 1; i < 5; i++) {
-        var formControl = document.createElement('div');
-        var choice = document.createElement('input');
-        var label = document.createElement('label');
-
-        formControl.classList.add('form-control', 'answer');
-        choice.type = "radio";
-        choice.name = "answer";
-        choice.id = `answer-${Object.keys(question)[i]}`;
-        choice.value = Object.values(question)[i];
-        label.htmlFor = `answer-${Object.keys(question)[i]}`;
-        label.innerText = Object.values(question)[i];
-
-        formControl.append(choice, label);
-        form.append(formControl);
-    }
-
-    //Adding elements in the DOM tree
-    bFormControl.appendChild(nextBtn);
-    form.appendChild(bFormControl);
-    formWrapper.appendChild(form);
-    quizzDisplay.append(questionDisplay, formWrapper);
-    return quizzDisplay;
-}
-
-function addClass(element) {
-    element.classList.add('selected');
-}
-
-function displayQuestion() {
-    container.append(buildForm());
-    var formControls = document.querySelectorAll('.answer');
-    formControls.forEach(selection => {
-        var label = selection.querySelector('label');
-        selection.onmouseover = () => {
-            selection.classList.add('selected');
-            label.classList.add('selected');
-        }
-        selection.onmouseout = () => {
-            selection.classList.remove('selected');
-            label.classList.remove('selected');
-        }
-        selection.onclick = () => {
-            var answer = selection.querySelector('input').value;
-            selection.classList.add('selected-answer');
-            getAnswer(answer);
-            disableAll(answer);
-            console.log(score);
-        }
-    });
-}
-
-function getAnswer(answer) {
-    if (answer == question.correct) {
-        answerAp.innerText = 'Correct!';
-        answerAp.classList.add('status-correct');
-        score += 1;
-        // score = score - 1;
+var nextBtn = document.getElementById('next');
+nextBtn.disabled = true;
+nextBtn.onmouseover = () => {
+    if (nextBtn.disabled) {
+        nextBtn.style.cursor = "default";
     } else {
-        answerAp.innerText = 'Incorrect!';
+        nextBtn.style.cursor = "pointer";
+    }
+}
+
+labels.forEach(label => {
+    label.onmouseover = () => {
+        label.classList.add('hover');
+    }
+    label.onmouseout = () => {
+        label.classList.remove('hover');
+    }
+    label.onclick = () => {
+        label.classList.add('active');
+        answer = label.parentElement.querySelector('input').id;
+        getAnswer(answer, questionList[index]);
+    }
+});
+
+function displayQuestion(s_question) {
+    questionDisplay.innerText = s_question.question;
+    var i = 0
+    var j = 1;
+    while (i < labels.length) {
+        labels[i].innerText = Object.values(s_question)[j];
+        inputs[i].value = Object.values(s_question)[j];
+        i++;
+        j++;
+    }
+}
+
+function getAnswer(answer, question) {
+    if (answer == question.correct) {
+        answerAp.innerText = "Correct!";
+        answerAp.classList.add('status-correct');
+        score++;
+    } else {
+        answerAp.innerText = "Incorrect!";
         answerAp.classList.add('status-false');
     }
+    nextBtn.disabled = false;
 }
 
-function disableAll(answer) {
-    var formControls = document.querySelectorAll('.answer');
-    var formBtn = document.querySelector('input[type=submit]');
-    formControls.forEach(element => {
-        var elementLabel = element.querySelector('label');
-        if (elementLabel.innerText != answer) {
-            element.querySelector('input').disabled = true;
-            element.onmouseover = () => {
-                element.classList.remove('selected');
-                elementLabel.classList.remove('selected');
-            }
-            element.onclick = () => {
-                element.classList.remove('selected-answer');
-            }
+function disableAll() {
+    answer = "";
+    labels.forEach(label => {
+        label.classList.remove('active');
+        var input = label.parentElement.querySelector('input');
+        if (input.checked) {
+            input.checked = false;
         }
     });
-    formBtn.disabled = false;
 }
 
-displayQuestion();
+displayQuestion(questionList[index]);
+
+nextBtn.onclick = () => {
+    answerAp.innerText = "";
+    answerAp.classList.remove('status-correct', 'status-false');
+    disableAll();
+    index++;
+    if (index < questionList.length) {
+        displayQuestion(questionList[index]);
+    } else {
+        questionContainer.style.display = "none";
+        scoreDisplayText.innerText = `Vous avez trouvé ${score}/4 questions`;
+        scoreDisplay.style.display = "block";
+    }
+}
+
+var restartBtn = document.getElementById('restart');
+restartBtn.onclick = () => {
+    scoreDisplay.style.display = "none";
+    questionContainer.style.display = "block";
+    index = 0;
+    score = 0;
+    displayQuestion(questionList[index]);
+}

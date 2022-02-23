@@ -1,11 +1,11 @@
-var pwdLengthField = document.getElementById('pwd-length');
+var pwdLengthField = document.getElementById('length-field');
 var form = document.getElementById('form');
 var errorDisplay = document.getElementById('error');
 var btn = document.querySelector('#btn');
 var copyBtn = document.getElementById('copy-btn');
 copyBtn.disabled = true;
-var pwdDisplay = document.getElementById('pwd-display')
-btn.disabled = true;
+var pwdDisplay = document.getElementById('password-display')
+// btn.disabled = true;
 btn.onclick = () => {
     console.log('clicked');
 }
@@ -16,23 +16,9 @@ btn.onmouseover = () => {
         btn.style.cursor = "pointer";
     }
 }
-var checkbox = document.querySelectorAll('input[type=checkbox]');
-checkbox.forEach(check => {
-    check.addEventListener('change', () => {
-        if (check.checked) {
-            console.log('checked');
-            if (btn.disabled == true) {
-                btn.disabled = false;
-            }
-            btn.disabled = false;
-        } else {
-            btn.disabled = true;
-            console.log('unchecked');
-        }
-    })
-});
 
 function checkForm() {
+    checkbox = document.querySelectorAll('input');
     var checkedValues = 0
     if (pwdLengthField.value == "") {
         return "Password length empty!";
@@ -74,22 +60,17 @@ function checkValues() {
             switch (checkedValues[i].value) {
                 case "capital":
                     model += "ABCDEFGHIJKLMNOPQRSTUVWXTZ";
-                    // console.log(model);
                     break;
                 case "small":
                     model += "abcdefghiklmnopqrstuvwxyz"
-                    // console.log(model);
                     break;
-                case "numbers":
+                case "number":
                     model += "0123456789";
-                    // console.log(model);
                     break;
                 case "special":
-                    model += ".!$#@"
-                    // console.log('special');
+                    model += ".!$#@?_-"
                     break;
                 default:
-                    // console.log('Choose a value');
                     break;
             }
         }
@@ -106,12 +87,20 @@ function passGen(model) {
     return password;
 }
 
+var checkboxes = document.querySelectorAll('input[type=checkbox]');
+console.log(checkboxes);
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+       
+   })
+});
+
 btn.addEventListener('click', () => {
     var errorMsg = checkForm();
     if (errorMsg != "") {
         errorDisplay.innerText = errorMsg;
     } else {
-        var pwdDisplay = document.getElementById('show-pwd');
+        var pwdDisplay = document.getElementById('show-password');
         pwdDisplay.innerText = passGen(checkValues());
         copyBtn.disabled = false;
         copyBtn.addEventListener('click', () => {

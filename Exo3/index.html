@@ -6,45 +6,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/style.css">
-    <title>Exo 3</title>
+    <title>Exo 3.1</title>
 </head>
 
 <body>
-
+    <p id="error"></p>
     <div class="container">
-        <p id="error"></p>
         <div class="generator">
-            <div id="table">
-                <div type="text" name="" id="pwd-display">
+            <div class="table">
+                <div name="" id="password-display">
                     <input id="copy-btn" type="button" value="Copy">
-                    <p id="show-pwd"></p>
+                    <p id="show-password"></p>
                 </div>
                 <div class="form-wrapper">
                     <form action="" method="post" id="form">
                         <div class="form-control">
-                            <label for="pwd-length">Longueur du password</label>
-                            <input type="text" name="length" id="pwd-length" value="15"><br>
+                            <label for="length-field">Longueur du password</label>
+                            <input type="text" name="password-length" id="length-field" value="15">
                         </div>
                         <div class="form-control">
-                            <label for="capital-letters">Contient des lettres majuscules</label>
-                            <input type="checkbox" name="hasCapital" id="capital-letters" value="capital"><br>
+                            <label for="capital">Contient des Lettres Majuscules</label>
+                            <input type="checkbox" name="capital" id="capital" value="capital">
                         </div>
                         <div class="form-control">
-                            <label for="small-letters">Contient des lettres minuscules</label>
-                            <input type="checkbox" name="hasSmall" id="small-letters" value="small"><br>
+                            <label for="small">Contient des Lettres Minuscules</label>
+                            <input type="checkbox" name="small" id="small" value="small">
                         </div>
                         <div class="form-control">
-                            <label for="numbers">Contient des nombres</label>
-                            <input type="checkbox" name="hasNumbers" id="numbers" value="numbers"><br>
+                            <label for="numbers">Contient des Nombres</label>
+                            <input type="checkbox" name="numbers" id="numbers" value="number">
                         </div>
                         <div class="form-control">
-                            <label for="specials">Contient des caractères spéciaux</label>
-                            <input type="checkbox" name="hasSpecials" id="specials" value="special"><br>
-                        </div>
-                        <div class="form-control submit">
-                            <input id="btn" role="button" type="button" value="Generer Le Mot De Passe">
+                            <label for="special">Contient des Caracteres Speciaux</label>
+                            <input type="checkbox" name="special" id="special" value="special">
                         </div>
                     </form>
+                    <input type="button" id="btn" value="Generer Le Mot de Passe">
                 </div>
             </div>
         </div>
