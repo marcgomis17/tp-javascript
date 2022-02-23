@@ -1,8 +1,8 @@
 var items = [
-    { name: "Mon Premier", selected: 0, location: "leftGroup" },
-    { name: "Mon Deuxieme", selected: 0, location: "leftGroup" },
-    { name: "Mon Troisième", selected: 0, location: "leftGroup" },
-    { name: "Mon Quatrième", selected: 0, location: "leftGroup" }
+    { name: "Mon Premier", selected: 0, location: 0 },
+    { name: "Mon Deuxieme", selected: 0, location: 0 },
+    { name: "Mon Troisième", selected: 0, location: 0 },
+    { name: "Mon Quatrième", selected: 0, location: 0 }
 ];
 var leftGroup = document.getElementById('left-group');
 var rightGroup = document.getElementById('right-group');
@@ -30,42 +30,25 @@ function setEvents() {
         element.onclick = () => {
             element.classList.toggle('active');
             items.forEach(item => {
-                var selectedItems = [];
                 if (element.classList.contains('active')) {
-                    if (leftGroup.querySelectorAll('p').length == 0 || rightGroup.querySelectorAll('p').length == 0) {
+                    if (leftGroup.childElementCount == 0 || rightGroup.childElementCount == 0) {
                         if (element.innerText == item.name) {
-                            item.selected == true;
-                            if (item.location == "leftGroup") {
+                            if (item.location == 0) {
                                 toLeftBtn.disabled = true;
                                 toRightBtn.disabled = false;
                             } else {
-                                if (item.location == "rightGroup") {
-                                    toRightBtn.disabled = true;
-                                    toLeftBtn.disabled = false;
-                                }
+                                toLeftBtn.disabled = false;
+                                toRightBtn.disabled = true;
                             }
-                            console.log(item.name + ' selected');
                         }
                     } else {
                         toRightBtn.disabled = false;
                         toLeftBtn.disabled = false;
                     }
-                } else {
-                    if (element.innerText == item.name) {
-                        item.selected == false;
-                        if (item.location == "leftGroup") {
-                            toLeftBtn.disabled = false;
-                        } else {
-                            if (item.location == "rightGroup") {
-                                toRightBtn.disabled = true;
-                            }
-                        }
-                        console.log(item.name + ' unselected');
-                    }
                 }
             });
         }
-    });
+    })
 }
 
 function moveItems(grpFrom, grpTo) {
@@ -79,15 +62,7 @@ function moveItems(grpFrom, grpTo) {
                     grpTo.append(p);
                     grpFrom.removeChild(element);
                     setEvents();
-                    if (item.location == "leftGroup") {
-                        item.location = "rightGroup";
-                    } else {
-                        if (item.location = "rightGroup") {
-                            item.location = "leftGroup";
-                        }
-                        console.log(item.location);
-                    }
-                    console.log(items);
+                    item.location = !item.location;
                 }
             });
         }
