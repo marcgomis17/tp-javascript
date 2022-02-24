@@ -33,15 +33,13 @@ var questionList = [
     }
 ];
 
-var container = document.querySelector('.container');
+var answerAp = document.querySelector('.status');
 var questionDisplay = document.getElementById('question-display');
 var questionContainer = document.querySelector('.question');
-var scoreDisplay = document.querySelector('.score');
-var scoreDisplayText = document.querySelector('.score-display');
 var labels = document.querySelectorAll('label');
 var inputs = document.querySelectorAll('input[type=radio]');
-var answerAp = document.querySelector('.status');
-var form = document.getElementById('form-wrapper');
+var scoreDisplay = document.querySelector('.score');
+var scoreDisplayText = document.querySelector('.score-display');
 var index = 0;
 var score = 0;
 var answer = "";

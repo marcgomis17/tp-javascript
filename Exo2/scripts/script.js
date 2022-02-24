@@ -1,8 +1,8 @@
 var items = [
-    { name: "Mon Premier", selected: 0, location: 0 },
-    { name: "Mon Deuxieme", selected: 0, location: 0 },
-    { name: "Mon Troisième", selected: 0, location: 0 },
-    { name: "Mon Quatrième", selected: 0, location: 0 }
+    { name: "Mon Premier", location: 0 },
+    { name: "Mon Deuxieme", location: 0 },
+    { name: "Mon Troisième", location: 0 },
+    { name: "Mon Quatrième", location: 0 }
 ];
 var leftGroup = document.getElementById('left-group');
 var rightGroup = document.getElementById('right-group');

@@ -23,15 +23,15 @@ body{
 .container{
     height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 }
 
 .generator{
-    align-self: baseline;
+    align-self: center;
     justify-self: center;
     background-color: #8a2be2;
     padding: 1%;
-    min-width: 30%;
+    min-width: 50%;
 }
 
 .table{
@@ -76,7 +76,7 @@ body{
 input[type="text"]{
     text-align: right;
     min-width: 10%;
-    width: 15%;
+    width: 10%;
 }
 
 #btn{

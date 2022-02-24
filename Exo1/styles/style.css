@@ -13,11 +13,15 @@ body{
 }
 
 button, .action-bar{
-    background-color: rgb(25, 199, 25);
+    background-color: #19c719;
 }
 
 #right-btn{
     align-self: flex-end;
+}
+
+#addBtn{
+    font-weight: bold;
 }
 
 #right-btn button:hover{
@@ -42,8 +46,11 @@ button, .action-bar{
 .sheet{
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    width: 40%;
     margin: 1%;
-    border: 1px solid rgb(25, 199, 25);
+    border: 1px solid #19c719;
+    border-radius: 5%;
 }
 
 .action-bar{
@@ -70,5 +77,6 @@ button, .action-bar{
 }
 
 .edit{
+    resize: none;
     visibility: visible;
 }

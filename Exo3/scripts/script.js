@@ -5,10 +5,7 @@ var btn = document.querySelector('#btn');
 var copyBtn = document.getElementById('copy-btn');
 copyBtn.disabled = true;
 var pwdDisplay = document.getElementById('password-display')
-// btn.disabled = true;
-btn.onclick = () => {
-    console.log('clicked');
-}
+btn.disabled = true;
 btn.onmouseover = () => {
     if (btn.disabled) {
         btn.style.cursor = "default";
@@ -18,7 +15,7 @@ btn.onmouseover = () => {
 }
 
 function checkForm() {
-    checkbox = document.querySelectorAll('input');
+    checkboxes = document.querySelectorAll('input');
     var checkedValues = 0
     if (pwdLengthField.value == "") {
         return "Password length empty!";
@@ -32,8 +29,8 @@ function checkForm() {
             }
         }
     }
-    for (let i = 0; i < checkbox.length; i++) {
-        if (checkbox[i].type == 'checkbox' && checkbox[i].checked) {
+    for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].type == 'checkbox' && checkboxes[i].checked) {
             checkedValues++;
         }
     }
@@ -88,11 +85,24 @@ function passGen(model) {
 }
 
 var checkboxes = document.querySelectorAll('input[type=checkbox]');
-console.log(checkboxes);
 checkboxes.forEach(checkbox => {
+    var checked = 0;
     checkbox.addEventListener('change', () => {
-       
-   })
+        if (checkbox.checked) {
+            btn.disabled = false;
+        } else {
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (!checkboxes[i].checked) {
+                    btn.disabled = false;
+                } else {
+                    checked += 1;
+                }
+            }
+            if (checked != 0) {
+                btn.disabled = false;
+            }
+        }
+    })
 });
 
 btn.addEventListener('click', () => {
@@ -105,7 +115,7 @@ btn.addEventListener('click', () => {
         copyBtn.disabled = false;
         copyBtn.addEventListener('click', () => {
             navigator.clipboard.writeText(pwdDisplay.innerText);
-            alert('Mot de passe copié!!');
+            copyBtn.value = "Copied!";
         })
     }
 })

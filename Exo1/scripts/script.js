@@ -1,6 +1,10 @@
 var addBtn = document.getElementById('addBtn');
 var notes = document.getElementById('notes');
 
+function setNoteTitle() {
+
+}
+
 function buildSheet() {
     var sheet = document.createElement('div');
     var actionBar = document.createElement('div');
@@ -35,19 +39,19 @@ function buildSheet() {
         sheet.parentElement.removeChild(sheet);
     })
 
-    textArea.setAttribute('rows', '10');
+    textArea.setAttribute('rows', '20');
     textArea.setAttribute('cols', '30');
     textArea.className = "edit";
 
 
     btn.append(deleteBtn, editBtn);
     blankSpace.addEventListener('click', () => {
-        if (textArea.style.visibility == "visible") {
-            textArea.style.visibility = "hidden";
+        if (textArea.style.display == "block") {
+            textArea.style.display = "none";
             sheet.style.border = "none";
             editBtn.disabled = true;
         } else {
-            textArea.style.visibility = "visible";
+            textArea.style.display = "block";
             sheet.style.border = "1px solid rgb(25, 199, 25)";
             editBtn.disabled = false;
         }
@@ -58,8 +62,7 @@ function buildSheet() {
 }
 
 function addNote() {
-    var sheet = buildSheet();
-    notes.append(sheet);
+    notes.append(buildSheet());
 }
 
 addBtn.addEventListener('click', addNote);
