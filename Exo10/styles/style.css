@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#search {
+    display: flex;
+    justify-content: center;
+    padding: 2%;
+}
+
+#search-input {
+    border: none;
+    background-color: #eeeeee;
+    border-radius: 4%;
+    height: 40px;
+    width: 40%;
+    text-indent: 4%;
+}
+
+#search-input:focus {
+    outline: none;
+}
+
+#fav {
+    background-color: #f0e2fd;
+    margin-top: 1%;
+    padding-top: 2%;
+}
+
+#fav-title {
+    margin: 0;
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+#meals {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.meal-display {
+    height: auto;
+    width: 10%;
+}
+
+/* ================= Animations ========================= */
+.hidden {
+    display: none;
+}

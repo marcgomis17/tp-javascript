@@ -1,0 +1,134 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow-y: hidden;
+}
+
+.container-fluid {
+    height: 100vh;
+    margin: 0;
+}
+
+#menu-wrapper {
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.side-menu {
+    background-color: #353a3f;
+    color: #9da1a8;
+    width: 20%;
+    height: 100%;
+    margin-left: -16%;
+    padding-right: 0.5%;
+    transition: margin 0.4s ease;
+}
+
+#menu-btn {
+    border: none;
+    height: 40px;
+    margin: 0.5% 0% 0% 0.5%;
+    padding-top: 0.7%;
+}
+
+#menu-btn:hover {
+    cursor: pointer;
+}
+
+div[class $=profile] {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #4a4e53;
+}
+
+p[class^=admin] {
+    margin-left: 10%;
+}
+
+.search-section {
+    margin-top: 6%;
+}
+
+#search {
+    height: 40px;
+    width: 100%;
+    margin-left: 4%;
+    background-color: #41474d;
+    color: #7e858b;
+    border: 1px solid #7e858b;
+    border-radius: 4%;
+    text-indent: 2%;
+}
+
+#menu-list {
+    padding: 0% 0% 0% 2%;
+}
+
+i {
+    height: 40px;
+    width: 40px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul a {
+    text-decoration: none;
+    color: #9da1a8;
+}
+
+ul li {
+    display: flex;
+    align-items: center;
+    padding-left: 10%;
+}
+
+li i {
+    margin-top: 40px;
+}
+
+ul li:hover {
+    background-color: #4a4e53;
+    color: #fff;
+}
+
+.menu-text {
+    margin-left: 5%;
+}
+
+li {
+    height: 40px;
+}
+
+.submenu i {
+    margin-top: 11%;
+}
+
+/* ================ Animations ====================== */
+.show {
+    padding: 0% 1% 0% 0%;
+    margin-left: 0%;
+}
+
+.minimized {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-left: 10%;
+    padding-right: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.unfold {
+    display: block;
+}
