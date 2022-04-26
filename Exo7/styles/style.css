@@ -1,8 +1,5 @@
 body {
     overflow-y: hidden;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: fixed;
 }
 
 #main-container {
@@ -10,11 +7,20 @@ body {
     padding-top: 10%;
 }
 
-#main-container::after {
-    filter: blur(200px);
+/* Slideshow */
+#background-container {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: fixed;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    filter: blur(3px);
 }
 
-/* Slideshow */
 .carousel-inner {
     height: 100%;
     display: flex;
@@ -80,4 +86,8 @@ body {
 
 .current {
     background-color: #808080;
+}
+
+button:focus {
+    outline: none;
 }

@@ -1,4 +1,16 @@
-var images = ['./images/img1.jpeg', './images/img2.jpeg', './images/img3.jpeg']
+var images =
+    [
+        './images/img1.jpg',
+        './images/img2.jpg',
+        './images/img3.jpg',
+        './images/img4.jpg',
+        './images/img5.jpg',
+        './images/img6.jpg',
+        './images/img7.jpg',
+        './images/img8.jpg',
+        './images/img9.jpg',
+        './images/img10.jpg'
+    ];
 var slides = document.querySelectorAll('.slide');
 var indicators = document.querySelectorAll('.carousel-indicators button');
 var buttons = document.querySelectorAll('.btn');
@@ -8,7 +20,9 @@ setBackground(0);
 
 function setBackground(i) {
     var url = images[i];
-    document.body.style.backgroundImage = "url('" + url + "')";
+    var background = document.getElementById('background-container');
+    // document.body.style.backgroundImage = "url('" + url + "')";
+    background.style.backgroundImage = "url('" + url + "')";
 }
 
 function next() {

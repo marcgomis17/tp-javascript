@@ -1,56 +1,55 @@
 body,
 html {
-    height: 100%;
-    margin: 0;
+	height: 100%;
+	margin: 0;
 }
 
 #background {
-    background-image: url('../background.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    filter: blur(3px);
-    height: 100%;
-    z-index: 0;
+	background-image: url("../background.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	filter: blur(3px);
+	height: 100%;
+	z-index: 0;
 }
 
 #countdown-container {
-    width: 100%;
-    margin: -35% 62% 20% 0%;
-    position: absolute;
-    z-index: 2;
-    color: #ffffff;
-
+	width: 100%;
+	margin: -35% 62% 20% 0%;
+	position: absolute;
+	z-index: 2;
+	color: #ffffff;
 }
 
 #countdown {
-    display: flex;
-    padding-left: 33%;
+	display: flex;
+	padding-left: 33%;
 }
 
 #title-container {
-    width: 100%;
-    text-align: center;
-    color: #ffffff;
+	width: 100%;
+	text-align: center;
+	color: #ffffff;
 }
 
 .title {
-    font-size: 50px;
+	font-size: 50px;
 }
 
 .timer {
-    margin-right: 5%;
+	margin-right: 5%;
 }
 
 .number,
 .text {
-    text-align: center;
-    font-size: x-large;
+	text-align: center;
+	font-size: x-large;
 }
 
 .year-text {
-    color: #676767;
-    text-align: center;
-    font-size: 130px;
-    opacity: 0.5;
+	color: #676767;
+	text-align: center;
+	font-size: 130px;
+	opacity: 0.5;
 }

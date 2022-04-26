@@ -1,11 +1,12 @@
 var moviesWrapper = document.getElementById('movies');
 var searchInput = document.getElementById('search-input');
 var rating = document.getElementById('rating');
+const loader = document.getElementById('loading');
 
 const API_KEY = "468f88edca940e5186a818f559908ef0";
 const IMG_PATH = "https://image.tmdb.org/t/p/w500";
 var page = 1;
-var url = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=" + API_KEY + "&page=" + page;
+var url = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=" + API_KEY + "&page=";
 
 function setColor(mark) {
     if (mark > 5.9) {
@@ -17,14 +18,18 @@ function setColor(mark) {
     }
 }
 
-var getMovies = (url) => {
-    return new Promise((res, rej) => {
-        fetch(url).then((data) => {
-            res(data.json());
-        }).catch((e) => {
-            rej(console.error(e));
-        });
-    });
+async function getMovies(url) {
+    try {
+        var response = await fetch(url);
+        if (response.ok) {
+            var data = await response.json();
+            return data;
+        } else {
+            console.error('Error');
+        }
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 function displayMovies(moviesArray) {
@@ -70,13 +75,13 @@ function displayMovies(moviesArray) {
 
         moviesWrapper.append(movieDisplay);
     });
-
 }
 
 function render(url) {
-    getMovies(url).then((response) => {
-        var movies = response.results;
-        console.log(movies[0]);
+    getMovies(url).then((data) => {
+        var movies = data.results;
+        setTimeout(moviesWrapper.classList.remove('hidden'), 8000);
+        loader.classList.add('hidden');
         displayMovies(movies);
     }).catch((error) => {
         console.error("Erreur", error);
@@ -85,8 +90,10 @@ function render(url) {
 
 render(url);
 
-searchInput.oninput = async () => {
+searchInput.oninput = () => {
     moviesWrapper.innerHTML = "";
+    moviesWrapper.classList.add('hidden');
+    loader.classList.remove('hidden');
     var query = searchInput.value;
     var queryUrl = "https://api.themoviedb.org/3/search/movie?&api_key=" + API_KEY + "&query=" + query;
     render(queryUrl);
@@ -94,21 +101,10 @@ searchInput.oninput = async () => {
         render(url);
     }
 }
-/* (function () {
-    var scrollY = function () {
-        var supportPageOffset = window.pageXOffset !== undefined;
-        var isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
 
-        return supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
+window.addEventListener('scroll', function () {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && searchInput.value == "") {
+        page++;
+        render(url + page);
     }
-
-    var top = search.getBoundingClientRect().top + scrollY();
-    window.addEventListener('scroll', function () {
-        if (top < scrollY() && !search.classList.contains('fixed')) {
-            search.classList.add('fixed');
-        }
-        if (top > scrollY() && search.classList.contains('fixed')) {
-            search.classList.remove('fixed');
-        }
-    })
-})(); */
+});
